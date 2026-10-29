@@ -1,0 +1,6 @@
+const cursor=document.querySelector('.cursor-glow'),progress=document.querySelector('.progress'),card=document.querySelector('.hero-card'),menuBtn=document.querySelector('.menu-btn'),navLinks=document.querySelector('.nav-links');
+window.addEventListener('mousemove',e=>{if(cursor){cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'}if(card&&innerWidth>850){const x=(e.clientX/innerWidth-.5)*5,y=(e.clientY/innerHeight-.5)*-5;card.style.transform=`rotate(3deg) rotateX(${y}deg) rotateY(${x}deg)`}});
+window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/max*100)+'%'});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+menuBtn?.addEventListener('click',()=>navLinks.classList.toggle('open'));document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}}));
